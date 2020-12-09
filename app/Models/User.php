@@ -1,14 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\UsesUuid;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, UsesUuid;
 
     /**
      * The attributes that are mass assignable.
@@ -36,4 +37,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role');
+    }
+
+    public function otpCode()
+    {
+        return $this->belongsTo('App\Models\OtpCode');
+    }
 }
