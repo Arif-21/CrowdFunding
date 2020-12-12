@@ -47,4 +47,20 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\OtpCode');
     }
+
+    public function verifyEmail()
+    {
+        if($this->email_verified_at != NULL)
+            return true;
+        
+        return false;
+    }
+
+    public function isAdmin()
+    {
+        if($this->role_id == 'bVaw7GVFRfsjei0DK6eYUBfDGX5vJIhesBTM')
+            return true;
+       
+        return false;
+    }
 }

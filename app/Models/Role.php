@@ -9,6 +9,10 @@ class Role extends Model
 {
     use UsesUuid;
 
+    protected $fillable = [
+        'name',
+    ];
+    
     protected $guarded = [];
 
     public function users()
