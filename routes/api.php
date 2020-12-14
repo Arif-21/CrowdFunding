@@ -12,8 +12,20 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+// */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::group(['middleware' => 'api',
+              'prefix' => 'auth',
+              'namespace' => 'Auth'], function($router){
+
+                Route::post('register', 'RegisterController');
+                Route::post('login', 'LoginController');
+                Route::post('verification', 'VerificationController');
+                Route::post('regenerate-otp', 'RegenerateOtpCodeController');
+                Route::post('update-password', 'UpdatePasswordController');
+            });
+                

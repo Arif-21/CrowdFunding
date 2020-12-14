@@ -5,11 +5,27 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Traits\UsesUuid;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable, UsesUuid;
+
+    protected function get_user_role_id()
+    {
+        $role = \App\Models\Role::where('name', 'user')->first();
+        return $role->id;
+    }   
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model){
+            $model->role_id = $model->get_user_role_id;
+        });
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -38,29 +54,41 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
     public function role()
     {
-        return $this->belongsTo('App\Models\Role');
+        return $this->belongsTo(Role::class);
     }
 
     public function otpCode()
     {
-        return $this->belongsTo('App\Models\OtpCode');
-    }
-
-    public function verifyEmail()
-    {
-        if($this->email_verified_at != NULL)
-            return true;
-        
-        return false;
+        return $this->hasOne(OtpCode::class);
     }
 
     public function isAdmin()
     {
-        if($this->role_id == 'bVaw7GVFRfsjei0DK6eYUBfDGX5vJIhesBTM')
-            return true;
+        if($this->role_id === $this->user_role_id())
+            return false;
        
-        return false;
+        return true;
     }
 }

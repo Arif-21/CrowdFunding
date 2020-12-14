@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\OtpCode;
-class VerificationController extends Controller
+
+class UpdatePasswordController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,6 +15,6 @@ class VerificationController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return 'verification';
+        return 'UpdatePassword';
     }
 }

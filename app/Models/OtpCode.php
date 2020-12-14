@@ -9,10 +9,12 @@ class OtpCode extends Model
 {
     use UsesUuid;
 
+    protected $fillable = ['otp', 'valid_until', 'user_id'];
+
     protected $guarded = [];
 
     public function user()
     {
-        return $this->hasOne('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 }

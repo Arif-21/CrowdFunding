@@ -8,6 +8,6 @@ class UserController extends Controller
 {
     public function index()
     {
-        return "Berhasil masuk ke route-1";
+        return "Berhasil masuk";
     }
 }

@@ -8,6 +8,6 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return "Admin Berhasil Masuk";
+        return "Anda Berhasil Masuk";
     }
 }

@@ -15,10 +15,10 @@ class VerifyEmailMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {   
-        if (Auth::user()->verifyEmail())
+    {  
+        if (Auth::user()->email_verified_at == NULL)
             return $next($request);
             
-        return abort(403);
+        return abort(403);  
     }
 }
