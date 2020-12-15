@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+Use App\Models\Role;
 
 class RoleSeeder extends Seeder
 {
@@ -14,14 +13,15 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
-            'id' => Str::random(36),
-            'name' => 'user', 
-        ]);
-
-        DB::table('roles')->insert([
-            'id' => Str::random(36),
-            'name' => 'admin', 
+        Role::insert([
+            [
+                'id' => Str::uuid(),
+                'name' => 'admin',
+            ],
+            [
+                'id' => Str::uuid(),
+                'name' => 'user',
+            ]
         ]);
     }
 }

@@ -3,29 +3,27 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-// */
+Route::group([
+    
+    'middleware' => 'api',
+    'prefix' => 'auth',
+    'namespace' => 'Auth'], 
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+function($router){
 
-Route::group(['middleware' => 'api',
-              'prefix' => 'auth',
-              'namespace' => 'Auth'], function($router){
+    Route::post('register', 'RegisterController');
+    Route::post('regenerate-otp', 'RegenerateOtpCodeController');
+    Route::post('login', 'LoginController');
+    Route::post('verification', 'VerificationController');
+    Route::post('update-password', 'UpdatePasswordController');
 
-                Route::post('register', 'RegisterController');
-                Route::post('login', 'LoginController');
-                Route::post('verification', 'VerificationController');
-                Route::post('regenerate-otp', 'RegenerateOtpCodeController');
-                Route::post('update-password', 'UpdatePasswordController');
-            });
-                
+});
+        
+Route::group([
+    'middleware' => ['api', 'verifyEmail', 'auth:api'],
+], function(){
+
+    Route::get('profile/show', 'ProfileController@show');
+    Route::post('profile/update', 'ProfileController@update');
+
+});

@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\RegisterRequest;
+use Illuminate\Http\Request;
 use App\Models\User;
-
 class RegisterController extends Controller
 {
     /**
@@ -14,13 +13,22 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(RegisterRequest $request)
+    public function __invoke(Request $request)
     {
-        User::create([ 
-            'name'  => request('name'),
-            'email' => request('email')
+        $request->validate([
+            'email' => 'required|unique:users,email|email',
+            'name'  => 'required',
         ]);
-        
-        return response()->json('registrasi');
+
+        $request_data = $request->all();
+        $user = User::create($request_data);
+
+        $data['user'] = $user;
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'User baru berhasil didaftarkan, silahkan cek email untuk melihat kode otp',
+            'data' => $data
+        ]);
     }
 }

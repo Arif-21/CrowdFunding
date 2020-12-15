@@ -17,13 +17,22 @@ class LoginController extends Controller
     {
         $request->validate([
             'email' => 'required',
-            'password' => 'required',
+            'password' => 'required'
         ]);
 
-        if (!$token = auth()->attempt($request->only('email', 'password'))){
-            return response(null, 401);
-        }
+        $credentials = $request->only(['email', 'password']);
+
+        if (! $token = auth()->attempt($credentials))
+            return response()->json(['error' => 'unauthorizes'], 401);
+
+        $data['token'] = $token;
         
-        return response()->json(compact('token'));
+        $data['user'] = auth()->user();
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'User berhasil login',
+            'data' => $data
+        ], 200);
     }
 }

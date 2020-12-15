@@ -8,16 +8,6 @@ use App\Traits\UsesUuid;
 class Role extends Model
 {
     use UsesUuid;
-
-    protected $fillable = [
-        'name',
-    ];
     
     protected $guarded = [];
-
-    public function users()
-    {
-        return $this->hasMany(User::class);
-    }
-
 }

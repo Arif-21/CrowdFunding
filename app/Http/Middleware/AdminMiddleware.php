@@ -3,8 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
-
 class AdminMiddleware
 {
     /**
@@ -22,7 +20,7 @@ class AdminMiddleware
             return $next($request);
 
         return response()->json([
-            'message' => 'Sorry anda bukan Admin.'
+            'message' => 'Anda bukan Admin.'
         ]);
     }
 }

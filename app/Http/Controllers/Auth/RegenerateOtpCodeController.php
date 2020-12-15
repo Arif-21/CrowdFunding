@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\User;
 class RegenerateOtpCodeController extends Controller
 {
     /**
@@ -15,6 +15,20 @@ class RegenerateOtpCodeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return 'RegenerateOtpCode';
+        $request->validate([
+            'email' => 'required',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        
+        $user->generate_otp_code();
+
+        $data['user'] = $user;
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'otp berhasil di generate, silahkan cek email untuk melihat kode otp',
+            'data' => $data
+        ]);
     }
 }

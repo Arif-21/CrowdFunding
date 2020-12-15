@@ -2,30 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+//use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Support\Carbon;
 use App\Traits\UsesUuid;
-
+use App\Models\OtpCode;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable, UsesUuid;
-
-    protected function get_user_role_id()
-    {
-        $role = \App\Models\Role::where('name', 'user')->first();
-        return $role->id;
-    }   
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model){
-            $model->role_id = $model->get_user_role_id;
-        });
-    }
 
     /**
      * The attributes that are mass assignable.
@@ -33,7 +19,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'photo_profile',
     ];
 
     /**
@@ -52,8 +38,28 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-    ];
+    ];  
 
+    protected function get_user_role_id()
+    {
+        $role = \App\Models\Role::where('name', 'user')->first();
+
+        return $role->id;
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model){
+            $model->role_id = $model->get_user_role_id();
+        });
+
+        static::created(function ($model){
+            $model->generate_otp_code();
+        });
+    }
+    
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -74,21 +80,29 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
-
-    public function otpCode()
-    {
-        return $this->hasOne(OtpCode::class);
-    }
-
     public function isAdmin()
     {
-        if($this->role_id === $this->user_role_id())
+        if ($this->role_id === $this->get_user_role_id()){
             return false;
-       
+        }
+
         return true;
+    }
+
+    public function generate_otp_code()
+    {
+        do {
+        
+            $random = mt_rand(100000,999999);
+            $check = OtpCode::where('otp' , $random)->first();
+        
+        } while ($check);
+            $now = Carbon::now();
+
+            //create Otpcode
+            OtpCode::updateOrCreate(
+                ['user_id' => $this->id],
+                ['otp' => $random, 'valid_until' => $now->addMinutes(5)]
+            );  
     }
 }
