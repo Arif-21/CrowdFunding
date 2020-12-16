@@ -12,7 +12,7 @@ Route::group([
 function($router){
 
     Route::post('register', 'RegisterController');
-    Route::post('regenerate-otp', 'RegenerateOtpCodeController');
+    Route::post('regenerate-otp', 'RegenerateOtpCodeController')->name('regenerate-otp');
     Route::post('login', 'LoginController');
     Route::post('verification', 'VerificationController');
     Route::post('update-password', 'UpdatePasswordController');

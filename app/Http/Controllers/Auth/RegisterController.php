@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Events\UserRegisteredEvent;
 use Illuminate\Http\Request;
 use App\Models\User;
+
 class RegisterController extends Controller
 {
     /**
@@ -24,6 +26,8 @@ class RegisterController extends Controller
         $user = User::create($request_data);
 
         $data['user'] = $user;
+
+        event(new UserRegisteredEvent($user));
 
         return response()->json([
             'response_code' => '00',

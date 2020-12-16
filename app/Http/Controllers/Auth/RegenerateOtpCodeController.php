@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Events\UserRegisteredEvent;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Jobs\UserOtpCodeRegistered;
 class RegenerateOtpCodeController extends Controller
 {
     /**
@@ -24,6 +26,8 @@ class RegenerateOtpCodeController extends Controller
         $user->generate_otp_code();
 
         $data['user'] = $user;
+
+        UserOtpCodeRegistered::dispatch($user->generate_otp_code());
 
         return response()->json([
             'response_code' => '00',
