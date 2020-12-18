@@ -105,4 +105,9 @@ class User extends Authenticatable implements JWTSubject
                 ['otp' => $random, 'valid_until' => $now->addMinutes(5)]
             );  
     }
+
+    public function otp_code()
+    {
+        return $this->hasOne('App\Models\OtpCode', 'user_id', 'id');
+    }
 }
