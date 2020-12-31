@@ -9,15 +9,11 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        badge: false,
         count: null,
     },
     mutations: {
         increment(state) {
-            let count = state.count++
-                if (count) {
-                    badge = true
-                }
+            state.count++
         }
     }
 })
