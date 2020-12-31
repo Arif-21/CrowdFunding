@@ -21,8 +21,7 @@ class UpdatePasswordController extends Controller
             'password' => 'required|confirmed|min:',
         ]);
 
-        User::where('email', $request->email)
-                                     ->update(['password' => bcrypt(request('password'))]);
+        User::where('email', $request->email)->update(['password' => bcrypt(request('password'))]);
 
         return response()->json([
             'response_code' => '00',

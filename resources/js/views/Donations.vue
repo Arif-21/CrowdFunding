@@ -3,10 +3,9 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Example Component</div>
-
+                    <div class="card-header">Donation</div>
                     <div class="card-body">
-                        Belajar membuat aplikasi crowdfunding dengan laravel dan vue js
+                        Donations
                     </div>
                 </div>
             </div>
