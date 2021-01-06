@@ -46,6 +46,7 @@
     </div>
 </template>
 <script>
+    import { mapMutations, mapActions } from 'vuex'
     export default {
         data: () => ({
             campaign: {},
@@ -54,6 +55,21 @@
             this.go()   
         },
         methods: {
+            ...mapMutations({
+                tambahTransaksi: 'transaction/insert'
+            }),
+            ...mapActions({
+                setAlert: 'alert/set'
+            }),
+            donate (){
+                this.tambahTransaksi()
+                this.setAlert({
+                    status: true,
+                    color : 'info',
+                    text  : 'Transaksi berhasi ditambahkan' 
+                })
+            },
+
             go() {
                 let { id } = this.$route.params
                 let url = '/api/campaign/'+id
@@ -66,10 +82,7 @@
                     let { responses } = error
                     console.log(responses)
                 })
-            },
-            donate() {
-                this.$store.commit("increment")
             }
         },
-    }
+    };
 </script>

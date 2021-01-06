@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- template Campaigns -->
-        <v-container class="ma-0 pa-0" gird-list-sm>
+        <v-container class="ma-auto pa-0" gird-list-sm>
             <div class="text-right">
                 <v-btn small text to="/campaigns" class="blue--text">
                     All Campaigns <v-icon>mdi-chevron-right</v-icon>
@@ -14,8 +14,10 @@
             </v-layout>
         </v-container>
 
+        <br>
+
         <!-- template Blogs -->
-        <v-container class="ma-0 pa-0" gird-list-sm>
+        <v-container class="ma-auto pa-0" gird-list-sm>
             <div class="text-right">
                 <v-btn small text to="/blogs" class="blue--text">
                     All Blogs <v-icon>mdi-chevron-right</v-icon>

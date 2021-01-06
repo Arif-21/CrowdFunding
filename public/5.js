@@ -56,6 +56,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -110,7 +112,7 @@ var render = function() {
     [
       _c(
         "v-container",
-        { staticClass: "ma-0 pa-0", attrs: { "gird-list-sm": "" } },
+        { staticClass: "ma-auto pa-0", attrs: { "gird-list-sm": "" } },
         [
           _c(
             "div",
@@ -149,9 +151,11 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
       _c(
         "v-container",
-        { staticClass: "ma-0 pa-0", attrs: { "gird-list-sm": "" } },
+        { staticClass: "ma-auto pa-0", attrs: { "gird-list-sm": "" } },
         [
           _c(
             "div",
