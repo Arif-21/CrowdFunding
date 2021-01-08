@@ -15,6 +15,12 @@ function($router){
     Route::post('login', 'LoginController');
     Route::post('verification', 'VerificationController');
     Route::post('update-password', 'UpdatePasswordController');
+    Route::post('logout', 'LogoutController')->middleware('auth:api');
+    Route::post('check-token', 'CheckTokenController')->middleware('auth:api');
+
+    //Route socialite (google, facebook, instagram , dll)
+    Route::get('social/{provider}', 'SocialiteController@redirectToProvider');
+    Route::get('social/{provider}/callback', 'SocialiteController@handleProviderCallback');
 
 });
         

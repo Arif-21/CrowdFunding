@@ -65,7 +65,7 @@
                 this.tambahTransaksi()
                 this.setAlert({
                     status: true,
-                    color : 'info',
+                    color : 'blue darken-2`',
                     text  : 'Transaksi berhasi ditambahkan' 
                 })
             },

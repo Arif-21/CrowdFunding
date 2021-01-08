@@ -82,7 +82,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.tambahTransaksi();
       this.setAlert({
         status: true,
-        color: 'info',
+        color: 'blue darken-2`',
         text: 'Transaksi berhasi ditambahkan'
       });
     },

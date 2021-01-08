@@ -2,14 +2,14 @@ export default {
     namespaced: true,
     state: {
         status: false,
-        color: '',
+        color: 'success',
         text: ''
     },
     mutations: {
         set: (state, payload) => {
-            state.status = payload.status,
-                state.color = payload.color,
-                state.text = payload.text
+            state.status = payload.status
+            state.color = payload.color
+            state.text = payload.text
         }
     },
     actions: {

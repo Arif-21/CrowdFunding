@@ -23,7 +23,7 @@ class LoginController extends Controller
         $credentials = $request->only(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials))
-            return response()->json(['error' => 'unauthorizes'], 401);
+            return response()->json(['error' => 'E-mail or password not found'], 401);
 
         $data['token'] = $token;
         

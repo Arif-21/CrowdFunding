@@ -1,7 +1,7 @@
 <template>
     <v-snackbar
         v-model="alert"
-        color="color"
+        :color="color"
         buttom
         multi-line
         outlined
