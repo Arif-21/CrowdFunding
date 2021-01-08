@@ -21,6 +21,18 @@ class BlogController extends Controller
             'data' => $data
         ], 200);
     }
+    public function index()
+    {
+        $blogs = Blog::paginate(6);
+
+        $data['blogs'] = $blogs;
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'Data blog berhasil ditampilkan',
+            'data' => $data
+        ], 200);
+    }
     public function store(Request $request)
     {
         $request->validate([
@@ -65,4 +77,16 @@ class BlogController extends Controller
             'data' => $data
         ], 200);
     } 
+    public function detail($id)
+    {
+        $blog = Blog::find($id);
+
+        $data['blog'] = $blog;
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'Detail blog berhasil ditampilkan',
+            'data' => $data
+        ], 200);
+    }
 }

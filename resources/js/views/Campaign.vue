@@ -36,7 +36,7 @@
                 {{ campaign.description }}    
 
             </v-card-text>
-            <v-card-actions>
+            <v-card-actions v-if="!guest">
                 <v-btn block color="primary" @click="donate" :disabled="campaign.collected >= campaign.required"> 
                     <v-icon>mdi-money</v-icon> &nbsp;
                     DONATE
@@ -46,13 +46,18 @@
     </div>
 </template>
 <script>
-    import { mapMutations, mapActions } from 'vuex'
+    import { mapMutations, mapActions, mapGetters } from 'vuex'
     export default {
         data: () => ({
             campaign: {},
         }),
         created() {
             this.go()   
+        },
+        computed: {
+            ...mapGetters({
+                guest: 'auth/guest'
+            }),
         },
         methods: {
             ...mapMutations({

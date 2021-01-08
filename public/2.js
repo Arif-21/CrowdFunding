@@ -73,6 +73,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.go();
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    guest: 'auth/guest'
+  })),
   methods: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])({
     tambahTransaksi: 'transaction/insert'
   })), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
@@ -213,29 +216,31 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "v-card-actions",
-                [
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        block: "",
-                        color: "primary",
-                        disabled:
-                          _vm.campaign.collected >= _vm.campaign.required
-                      },
-                      on: { click: _vm.donate }
-                    },
+              !_vm.guest
+                ? _c(
+                    "v-card-actions",
                     [
-                      _c("v-icon", [_vm._v("mdi-money")]),
-                      _vm._v("  \n                DONATE\n            ")
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            block: "",
+                            color: "primary",
+                            disabled:
+                              _vm.campaign.collected >= _vm.campaign.required
+                          },
+                          on: { click: _vm.donate }
+                        },
+                        [
+                          _c("v-icon", [_vm._v("mdi-money")]),
+                          _vm._v("  \n                DONATE\n            ")
+                        ],
+                        1
+                      )
                     ],
                     1
                   )
-                ],
-                1
-              )
+                : _vm._e()
             ],
             1
           )

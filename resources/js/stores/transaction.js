@@ -6,6 +6,9 @@ export default {
     mutations: {
         insert: (state, payload) => {
             state.transactions++
+        },
+        delete: (state, paylaod) => {
+            state.transactions = 0
         }
     },
     actions: {

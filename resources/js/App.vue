@@ -137,7 +137,7 @@
     </v-app>
 </template>
 <script>
-    import { mapActions, mapGetters } from 'vuex'
+    import { mapActions, mapGetters, mapMutations } from 'vuex'
     import Alert from './components/Alert'
     import Search from './components/Search'
     import Login from './components/Login'
@@ -184,6 +184,9 @@
                 setAlert: 'alert/set',
                 checkToken: 'auth/checkToken'
             }),
+            ...mapMutations({
+                 deleteTransaksi: 'transaction/delete'
+            }),
             logout (){
                 let config = {
                     headers: {
@@ -198,6 +201,7 @@
                         color: 'success',
                         text: 'Logout Successfully'
                     })
+                    this.deleteTransaksi()
                 })
                 .catch((error) =>{
                     let { data } = error.response

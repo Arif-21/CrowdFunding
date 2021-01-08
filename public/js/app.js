@@ -2273,12 +2273,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }
   }),
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
+  methods: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
     setDialogStatus: 'dialog/setStatus',
     setDialogComponent: 'dialog/setComponent',
     setAuth: 'auth/set',
     setAlert: 'alert/set',
     checkToken: 'auth/checkToken'
+  })), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])({
+    deleteTransaksi: 'transaction/delete'
   })), {}, {
     logout: function logout() {
       var _this = this;
@@ -2296,6 +2298,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           color: 'success',
           text: 'Logout Successfully'
         });
+
+        _this.deleteTransaksi();
       })["catch"](function (error) {
         var data = error.response.data;
 
@@ -66842,6 +66846,9 @@ __webpack_require__.r(__webpack_exports__);
   mutations: {
     insert: function insert(state, payload) {
       state.transactions++;
+    },
+    "delete": function _delete(state, paylaod) {
+      state.transactions = 0;
     }
   },
   actions: {},

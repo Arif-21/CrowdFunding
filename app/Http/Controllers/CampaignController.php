@@ -89,7 +89,6 @@ class CampaignController extends Controller
             'data' => $data
         ], 200);
     }
-
     public function search($keyword)
     {
         $campaigns = Campaign::select('*')->where('title', 'LIKE', "%".$keyword."%")
