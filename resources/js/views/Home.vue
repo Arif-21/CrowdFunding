@@ -35,7 +35,7 @@
                             <v-container fill-height fluid pa-0 ma-0>
                                 <v-layout fill-height align-end>
                                     <v-flex xs12 mx-2>
-                                        <span class="headline black--text" v-text="blog.title"></span>
+                                        <blog-item :blog="blog" class="headline white--text" v-text="blog.title" />
                                     </v-flex>
                                 </v-layout>
                             </v-container>
@@ -54,7 +54,8 @@
             blogs: [],
         }),
         components: {
-            CampaignItem: () => import('../components/CampaignItem')
+            CampaignItem: () => import('../components/CampaignItem'),
+            BlogItem: () => import('../components/BlogItem')
         },
         created(){
             axios.get('api/campaign/random/2')

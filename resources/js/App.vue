@@ -32,7 +32,7 @@
                         <v-icon left>mdi-lock</v-icon>
                         Login
                     </v-btn>
-                    <v-btn block color="success" class="mb-1" >
+                    <v-btn block color="success" class="mb-1">
                         <v-icon left>mdi-account</v-icon>
                         Register
                     </v-btn>
@@ -68,7 +68,7 @@
         <v-app-bar app color="blue darken-3" dark v-if="isHome">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-            <v-toolbar-title>SanbercodeApp</v-toolbar-title>
+            <v-toolbar-title>BaiturrohimApp</v-toolbar-title>
 
             <!-- pemisah content -->
             <v-spacer></v-spacer>

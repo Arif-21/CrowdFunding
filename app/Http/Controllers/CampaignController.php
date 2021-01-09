@@ -26,12 +26,18 @@ class CampaignController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => 'required|mimes:jpg,jpeg,png'
+            'image' => 'required|mimes:jpg,jpeg,png',
+            'address' => 'required',
+            'required' => 'required',
+            'collected' => 'required'
         ]);
 
         $campaign = Campaign::create([
             'title' => $request->title,
             'description' => $request->description,
+            'address' => $request->address,
+            'required' => $request->required,
+            'collected' => $request->collected
         ]);
 
         if ($request->hasFile('image'))

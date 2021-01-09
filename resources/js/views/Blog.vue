@@ -4,7 +4,7 @@
             <v-img
                 :src="blog.image"
                 class="white--text"
-                height="200px"
+                height="250px"
             >
                 <v-card-title
                     class="fill-height align-end"
